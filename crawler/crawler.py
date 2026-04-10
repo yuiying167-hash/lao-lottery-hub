@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
 # ── 환경변수 로드 ──────────────────────────────────────────
-load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'), override=True)
 
 ACCOUNT_ID  = os.getenv('CLOUDFLARE_ACCOUNT_ID', '')
 DATABASE_ID = os.getenv('CLOUDFLARE_D1_DATABASE_ID', '')
