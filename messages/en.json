@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "Home",
+    "history": "History",
+    "statistics": "Statistics",
+    "check": "Check",
+    "compare": "Compare"
+  },
+  "home": {
+    "title": "Lao Lottery Results Today",
+    "latest_result": "Latest Result",
+    "draw_date": "Draw Date",
+    "num6": "6-Digit Number",
+    "num5": "5-Digit Number",
+    "num4": "4-Digit Number",
+    "num3_top": "3-Digit Top",
+    "num2_top": "2-Digit Top",
+    "num2_bottom": "2-Digit Bottom",
+    "animal": "Animal Name",
+    "hot_numbers": "Hot Numbers",
+    "cold_numbers": "Cold Numbers",
+    "view_statistics": "View All Statistics",
+    "live_draw": "Live Draw"
+  }
+}

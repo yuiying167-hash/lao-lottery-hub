@@ -1,0 +1,11 @@
+name = "lao-lottery-hub"
+main = ".open-next/worker.js"
+compatibility_date = "2025-04-10"
+compatibility_flags = ["nodejs_compat"]
+
+assets = { directory = ".open-next/assets", binding = "ASSETS" }
+
+[[d1_databases]]
+binding = "DB"
+database_name = "lao-lottery-db"
+database_id = "1e54ee60-65c9-435c-89d7-4fdd00b1bca2"

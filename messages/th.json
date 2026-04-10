@@ -1,0 +1,54 @@
+{
+  "nav": {
+    "home": "หน้าหลัก",
+    "history": "ผลย้อนหลัง",
+    "statistics": "สถิติ",
+    "check": "ตรวจหวย",
+    "compare": "เปรียบเทียบ"
+  },
+  "home": {
+    "title": "ผลหวยลาววันนี้",
+    "latest_result": "ผลรางวัลล่าสุด",
+    "draw_date": "งวดวันที่",
+    "num6": "เลข 6 ตัว",
+    "num5": "เลข 5 ตัว",
+    "num4": "เลข 4 ตัว",
+    "num3_top": "เลข 3 ตัวบน",
+    "num2_top": "เลข 2 ตัวบน",
+    "num2_bottom": "เลข 2 ตัวล่าง",
+    "animal": "นามสัตว์",
+    "hot_numbers": "เลขร้อน",
+    "cold_numbers": "เลขเย็น",
+    "view_statistics": "ดูสถิติทั้งหมด",
+    "live_draw": "ถ่ายทอดสดหวยลาว"
+  },
+  "history": {
+    "title": "ผลหวยลาวย้อนหลัง",
+    "calendar_view": "ปฏิทิน",
+    "list_view": "รายการ",
+    "search_placeholder": "ค้นหาเลข..."
+  },
+  "statistics": {
+    "title": "สถิติหวยลาว",
+    "period_1m": "1 เดือน",
+    "period_3m": "3 เดือน",
+    "period_6m": "6 เดือน",
+    "period_1y": "1 ปี",
+    "period_all": "ทั้งหมด",
+    "hot_cold": "เลขร้อน-เย็น",
+    "heatmap": "ความถี่เลข",
+    "overdue": "เลขค้างนาน",
+    "animals": "สถิตินามสัตว์"
+  },
+  "check": {
+    "title": "ตรวจหวยลาว",
+    "input_placeholder": "ใส่เลขของคุณ",
+    "check_button": "ตรวจสอบ",
+    "win": "ถูกรางวัล!",
+    "lose": "ไม่ถูกรางวัล"
+  },
+  "compare": {
+    "title": "เปรียบเทียบงวด",
+    "select_draw": "เลือกงวด"
+  }
+}
