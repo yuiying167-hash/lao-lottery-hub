@@ -47,3 +47,49 @@ export async function getHotColdNumbers(
     cold: sorted.slice(-5).reverse().map(([digit, count]) => ({ digit, count })),
   }
 }
+
+export async function getHistoryResults(
+  db: D1Database,
+  page = 1,
+  perPage = 20,
+  search = ''
+): Promise<{ results: LotteryResult[]; total: number }> {
+  const offset = (page - 1) * perPage
+
+  if (search) {
+    const q = `%${search}%`
+    const { results } = await db
+      .prepare(
+        `SELECT * FROM lottery_results
+         WHERE num6 LIKE ? OR num5 LIKE ? OR num4 LIKE ?
+            OR num3_top LIKE ? OR num2_top LIKE ? OR num2_bottom LIKE ?
+         ORDER BY draw_date DESC LIMIT ? OFFSET ?`
+      )
+      .bind(q, q, q, q, q, q, perPage, offset)
+      .all<LotteryResult>()
+
+    const countRow = await db
+      .prepare(
+        `SELECT COUNT(*) as cnt FROM lottery_results
+         WHERE num6 LIKE ? OR num5 LIKE ? OR num4 LIKE ?
+            OR num3_top LIKE ? OR num2_top LIKE ? OR num2_bottom LIKE ?`
+      )
+      .bind(q, q, q, q, q, q)
+      .first<{ cnt: number }>()
+
+    return { results, total: countRow?.cnt ?? 0 }
+  }
+
+  const { results } = await db
+    .prepare(
+      `SELECT * FROM lottery_results ORDER BY draw_date DESC LIMIT ? OFFSET ?`
+    )
+    .bind(perPage, offset)
+    .all<LotteryResult>()
+
+  const countRow = await db
+    .prepare(`SELECT COUNT(*) as cnt FROM lottery_results`)
+    .first<{ cnt: number }>()
+
+  return { results, total: countRow?.cnt ?? 0 }
+}
