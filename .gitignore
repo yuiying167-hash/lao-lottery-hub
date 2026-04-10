@@ -48,3 +48,7 @@ next-env.d.ts
 # 환경변수
 .env.local
 .env.*.local
+crawler/.env
+crawler/.venv/
+crawler/__pycache__/
+crawler/logs/

@@ -8,4 +8,4 @@ assets = { directory = ".open-next/assets", binding = "ASSETS" }
 [[d1_databases]]
 binding = "DB"
 database_name = "lao-lottery-db"
-database_id = "1e54ee60-65c9-435c-89d7-4fdd00b1bca2"
+database_id = "1c5e82b9-3214-4940-a893-f8200da1cea0"

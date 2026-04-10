@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.laolottery.crawler</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/twinssn/Projects/lao-lottery-hub/crawler/.venv/bin/python3</string>
+    <string>/Users/twinssn/Projects/lao-lottery-hub/crawler/crawler.py</string>
+  </array>
+
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Weekday</key><integer>1</integer>
+      <key>Hour</key><integer>13</integer>
+      <key>Minute</key><integer>5</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>3</integer>
+      <key>Hour</key><integer>13</integer>
+      <key>Minute</key><integer>5</integer>
+    </dict>
+    <dict>
+      <key>Weekday</key><integer>5</integer>
+      <key>Hour</key><integer>13</integer>
+      <key>Minute</key><integer>5</integer>
+    </dict>
+  </array>
+
+  <key>StandardOutPath</key>
+  <string>/Users/twinssn/Projects/lao-lottery-hub/crawler/logs/launchd_stdout.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/Users/twinssn/Projects/lao-lottery-hub/crawler/logs/launchd_stderr.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+</dict>
+</plist>
