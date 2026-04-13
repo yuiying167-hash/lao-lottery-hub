@@ -21,10 +21,48 @@ const notoSansLao = Noto_Sans_Lao({
   weight: ['400', '700'],
 })
 
+const SITE_URL = 'https://lao-lottery-hub.yuiying167.workers.dev'
+
 export const metadata: Metadata = {
-  title: 'Lao Lottery Hub · ผลหวยลาว',
-  description: 'ผลหวยลาวล่าสุด สถิติ และตรวจหวยออนไลน์ อัปเดตอัตโนมัติ',
-  keywords: ['หวยลาว', 'ผลหวยลาว', 'ເລກລາວ', 'lao lottery'],
+  title: 'หวยลาว · ผลหวยลาวล่าสุด อัปเดตอัตโนมัติ',
+  description: 'ผลหวยลาวล่าสุด อัปเดตอัตโนมัติทุกวันจันทร์ พุธ ศุกร์ พร้อมสถิติย้อนหลัง เลขร้อน เลขเย็น และระบบตรวจหวยออนไลน์',
+  keywords: ['หวยลาว', 'ผลหวยลาว', 'ຫວຍລາວ', 'lao lottery', 'หวยลาววันนี้', 'เลขลาว', 'ตรวจหวยลาว'],
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    title: 'หวยลาว · ผลหวยลาวล่าสุด',
+    description: 'ผลหวยลาวล่าสุด อัปเดตอัตโนมัติ พร้อมสถิติและตรวจหวยออนไลน์',
+    url: SITE_URL,
+    siteName: 'หวยลาว',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'หวยลาว - ผลหวยลาวล่าสุด',
+      },
+    ],
+    locale: 'th_TH',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'หวยลาว · ผลหวยลาวล่าสุด',
+    description: 'ผลหวยลาวล่าสุด อัปเดตอัตโนมัติ พร้อมสถิติและตรวจหวยออนไลน์',
+    images: ['/og-image.png'],
+  },
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'icon', url: '/icon-192.png', sizes: '192x192' },
+    ],
+  },
 }
 
 export default function RootLayout({
@@ -44,13 +82,20 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-screen flex flex-col font-[var(--font-sarabun)] antialiased bg-[#0F172A] text-white">
+      <body className="min-h-screen flex flex-col font-[var(--font-sarabun)] antialiased"
+        style={{ background: 'var(--bg)', color: 'var(--cream)' }}>
         <Navbar />
         <div className="flex-1">
           {children}
         </div>
-        <footer className="border-t border-white/5 py-6 text-center text-xs text-slate-500">
-          © 2026 Lao Lottery Hub · ข้อมูลจาก mthai.com · อัปเดตทุกวันจันทร์ พุธ ศุกร์
+        <footer style={{
+          borderTop: '1px solid rgba(255,215,0,0.06)',
+          padding: '20px 16px',
+          textAlign: 'center',
+          fontSize: 11,
+          color: 'rgba(245,230,211,0.25)',
+        }}>
+          © 2026 หวยลาว · ข้อมูลจาก mthai.com · อัปเดตทุกวันจันทร์ พุธ ศุกร์
         </footer>
       </body>
     </html>

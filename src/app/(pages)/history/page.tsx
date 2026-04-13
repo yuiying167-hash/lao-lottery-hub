@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import HistoryTable from '@/components/lottery/HistoryTable'
 import Pagination from '@/components/lottery/Pagination'
-import type { LotteryResult } from '@/types/lottery'
 import AdBanner from '@/components/ui/AdBanner'
+import type { LotteryResult } from '@/types/lottery'
 
 interface ApiResponse {
   results: LotteryResult[]
@@ -24,125 +24,83 @@ export default function HistoryPage() {
   const fetchData = useCallback(async (p: number, q: string) => {
     setLoading(true)
     try {
-      const params = new URLSearchParams({
-        page: String(p),
-        per_page: '20',
-        ...(q ? { q } : {}),
-      })
+      const params = new URLSearchParams({ page: String(p), per_page: '20', ...(q ? { q } : {}) })
       const res = await fetch(`/api/lottery/history?${params}`)
-      const json: ApiResponse = await res.json()
-      setData(json)
+      setData(await res.json())
     } finally {
       setLoading(false)
     }
   }, [])
 
-  useEffect(() => {
-    fetchData(page, search)
-  }, [page, search, fetchData])
+  useEffect(() => { fetchData(page, search) }, [page, search, fetchData])
 
-  const handleSearch = () => {
-    setPage(1)
-    setSearch(inputValue.trim())
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') handleSearch()
-  }
-
-  const handleClear = () => {
-    setInputValue('')
-    setSearch('')
-    setPage(1)
-  }
-
-  const totalPages = data ? Math.ceil(data.total / data.perPage) : 0
+  const handleSearch = () => { setPage(1); setSearch(inputValue.trim()) }
+  const handleClear = () => { setInputValue(''); setSearch(''); setPage(1) }
 
   return (
-    <main className="min-h-screen bg-slate-50 dark:bg-slate-900 py-8 px-4">
-      <div className="max-w-3xl mx-auto flex flex-col gap-6">
+    <main className="py-6 px-4">
+      <div className="max-w-3xl mx-auto flex flex-col gap-5">
 
-        {/* 헤더 */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">
-              📋 ผลหวยลาวย้อนหลัง
-            </h1>
-            {data && (
-              <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5">
-                ทั้งหมด {data.total.toLocaleString()} งวด
-              </p>
-            )}
+            <h1 className="text-2xl font-black shimmer-text">ผลหวยลาวย้อนหลัง</h1>
+            {data && <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>ทั้งหมด {data.total.toLocaleString()} งวด</p>}
           </div>
-          <Link
-            href="/"
-            className="text-sm text-yellow-600 dark:text-yellow-400 hover:underline"
-          >
+          <Link href="/" className="text-xs px-3 py-1.5 rounded-full"
+            style={{ background: 'rgba(255,215,0,0.08)', color: 'rgba(255,215,0,0.7)' }}>
             ← หน้าหลัก
           </Link>
         </div>
 
+        <AdBanner slot="9081251463" />
+
         {/* 검색 */}
         <div className="flex gap-2">
           <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
+            type="tel" inputMode="numeric" value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleSearch()}
             placeholder="ค้นหาเลข เช่น 78, 478, 081478"
-            className="flex-1 rounded-xl border border-slate-300 dark:border-slate-600
-              bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100
-              px-4 py-2.5 text-sm outline-none
-              focus:ring-2 focus:ring-yellow-400 transition"
+            className="flex-1 rounded-2xl px-4 py-3 text-sm outline-none transition-all"
+            style={{
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(255,215,0,0.12)',
+              color: '#FFD700',
+            }}
           />
           {search && (
-            <button
-              onClick={handleClear}
-              className="px-4 py-2.5 rounded-xl text-sm font-medium
-                bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300
-                hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
-            >
+            <button onClick={handleClear}
+              className="px-4 rounded-2xl text-sm font-medium"
+              style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.5)' }}>
               ✕
             </button>
           )}
-          <button
-            onClick={handleSearch}
-            className="px-5 py-2.5 rounded-xl text-sm font-bold
-              text-slate-900 hover:opacity-90 transition-opacity"
-            style={{ background: '#FFD700' }}
-          >
+          <button onClick={handleSearch}
+            className="px-5 rounded-2xl text-sm font-bold"
+            style={{ background: '#FFD700', color: '#0a0e1a' }}>
             ค้นหา
           </button>
         </div>
 
-        {/* 광고 */}
-        <AdBanner slot="9081251463" />
-
         {/* 테이블 */}
         {loading ? (
-          <div className="text-center py-16 text-slate-400">
-            <div className="inline-block w-6 h-6 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin mb-3" />
-            <p>กำลังโหลด...</p>
+          <div className="text-center py-16" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <div className="inline-block w-5 h-5 border-2 border-yellow-400/50 border-t-yellow-400 rounded-full animate-spin mb-3" />
+            <p className="text-xs">กำลังโหลด...</p>
           </div>
         ) : (
           <HistoryTable results={data?.results ?? []} />
         )}
 
-        {/* 페이지네이션 */}
-        {!loading && totalPages > 1 && (
+        {!loading && Math.ceil((data?.total ?? 0) / (data?.perPage ?? 20)) > 1 && (
           <Pagination
             page={page}
-            totalPages={totalPages}
-            onPageChange={(p) => {
-              setPage(p)
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }}
+            totalPages={Math.ceil((data?.total ?? 0) / (data?.perPage ?? 20))}
+            onPageChange={p => { setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
           />
         )}
 
-        {/* 광고 하단 */}
         <AdBanner slot="9081251463" className="mt-2" />
-
       </div>
     </main>
   )

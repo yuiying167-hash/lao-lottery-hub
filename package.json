@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy": "opennextjs-cloudflare build && wrangler pages deploy .open-next/assets --project-name=lao-lottery-hub --commit-dirty=true",
+    "deploy": "opennextjs-cloudflare build && wrangler deploy",
     "preview": "opennextjs-cloudflare build && wrangler pages dev .open-next/assets",
     "cf-build": "opennextjs-cloudflare build"
   },

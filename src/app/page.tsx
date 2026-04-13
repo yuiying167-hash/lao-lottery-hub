@@ -15,72 +15,77 @@ export default async function HomePage() {
   ])
 
   return (
-    <main className="py-6 px-4">
-      <div className="max-w-2xl mx-auto flex flex-col gap-5">
+    <main style={{ padding: '24px 16px' }}>
+      <div style={{ maxWidth: 640, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 20 }}>
 
-        {/* 히어로 타이틀 */}
-        <div className="text-center pt-2 pb-1">
-          <h1 className="text-3xl font-extrabold tracking-tight mb-1"
-            style={{ color: '#FFD700', textShadow: '0 0 30px rgba(255,165,0,0.35)' }}>
-            🎯 Lao Lottery Hub
+        {/* 히어로 */}
+        <div style={{ textAlign: 'center', paddingTop: 8 }}>
+          <h1 className="shimmer-text" style={{ fontSize: 36, fontWeight: 900, letterSpacing: '-0.02em', marginBottom: 6 }}>
+            หวยลาว
           </h1>
-          <p className="text-slate-400 text-sm">
-            ผลหวยลาวล่าสุด · อัปเดตอัตโนมัติทุกวันจันทร์ พุธ ศุกร์
+          <p style={{ fontSize: 13, color: 'rgba(245,230,211,0.4)', letterSpacing: '0.02em' }}>
+            อัปเดตอัตโนมัติ · จันทร์ พุธ ศุกร์
           </p>
         </div>
 
-        {/* 광고 — 상단 */}
+        {/* 광고 */}
         <AdBanner slot="9081251463" />
 
-        {/* 최신 결과 카드 */}
-        {latest ? (
-          <ResultCard result={latest} />
-        ) : (
-          <div className="w-full rounded-3xl p-10 text-center border border-white/5"
-            style={{ background: '#162032' }}>
-            <p className="text-slate-400">ยังไม่มีข้อมูล กรุณารอผลงวดถัดไป</p>
+        {/* 최신 결과 */}
+        {latest ? <ResultCard result={latest} /> : (
+          <div style={{ borderRadius: 20, padding: 40, textAlign: 'center',
+            background: '#2a0a10', border: '1px solid rgba(255,215,0,0.06)',
+            color: 'rgba(245,230,211,0.3)' }}>
+            ยังไม่มีข้อมูล
           </div>
         )}
 
-        {/* 빠른 이동 버튼 */}
-        <div className="grid grid-cols-3 gap-3">
+        {/* 빠른 이동 */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
           {[
-            { href: '/history',    icon: '📋', label: 'ย้อนหลัง' },
-            { href: '/statistics', icon: '📊', label: 'สถิติ' },
-            { href: '/check',      icon: '✅', label: 'ตรวจหวย' },
-          ].map(({ href, icon, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className="flex flex-col items-center gap-1.5 py-4 rounded-2xl border border-white/6 transition-all hover:border-yellow-400/30 hover:bg-yellow-400/5"
-              style={{ background: '#162032' }}
-            >
-              <span className="text-2xl">{icon}</span>
-              <span className="text-xs font-semibold text-slate-300">{label}</span>
+            { href: '/history',    icon: '📋', label: 'ย้อนหลัง',  sub: 'ผลย้อนหลัง' },
+            { href: '/statistics', icon: '📊', label: 'สถิติ',      sub: 'เลขร้อน-เย็น' },
+            { href: '/check',      icon: '✅', label: 'ตรวจหวย',   sub: 'เช็คเลขทันที' },
+          ].map(({ href, icon, label, sub }) => (
+            <Link key={href} href={href} style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              gap: 6, padding: '18px 8px', borderRadius: 18,
+              textDecoration: 'none', transition: 'all 0.2s',
+              background: 'linear-gradient(135deg, #2a0a10, #1e0509)',
+              border: '1px solid rgba(255,215,0,0.07)',
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,215,0,0.25)'
+              ;(e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,215,0,0.07)'
+              ;(e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
+            }}>
+              <span style={{ fontSize: 26 }}>{icon}</span>
+              <span style={{ fontSize: 13, fontWeight: 700, color: '#f5e6d3' }}>{label}</span>
+              <span style={{ fontSize: 10, color: 'rgba(245,230,211,0.3)' }}>{sub}</span>
             </Link>
           ))}
         </div>
 
-        {/* HOT/COLD 통계 */}
+        {/* HOT/COLD */}
         <HotColdNumbers hot={hotCold.hot} cold={hotCold.cold} />
 
-        {/* 광고 — 중간 */}
+        {/* 광고 */}
         <AdBanner slot="9081251463" />
 
-        {/* 안내 카드 */}
-        <div className="rounded-2xl p-5 border border-white/5 text-sm text-slate-400 leading-relaxed"
-          style={{ background: '#162032' }}>
-          <p className="font-semibold text-slate-300 mb-2">📌 เกี่ยวกับ Lao Lottery Hub</p>
-          <p>
-            เว็บไซต์นี้รวบรวมผลหวยลาวอัตโนมัติจากแหล่งข้อมูลที่เชื่อถือได้
-            อัปเดตทุกวันจันทร์ พุธ และศุกร์ หลังประกาศผล
-            พร้อมสถิติย้อนหลัง ระบบตรวจหวย และวิเคราะห์เลขร้อน-เลขเย็น
+        {/* 안내 */}
+        <div style={{ borderRadius: 16, padding: '18px 20px',
+          background: 'rgba(255,215,0,0.03)', border: '1px solid rgba(255,215,0,0.07)',
+          fontSize: 13, color: 'rgba(245,230,211,0.4)', lineHeight: 1.7 }}>
+          <p style={{ fontWeight: 700, color: 'rgba(245,230,211,0.65)', marginBottom: 6, fontSize: 13 }}>
+            เกี่ยวกับ หวยลาว
           </p>
+          รวบรวมผลหวยลาวอัตโนมัติ อัปเดตทุกวันจันทร์ พุธ ศุกร์ พร้อมสถิติย้อนหลัง ระบบตรวจหวย และวิเคราะห์เลขร้อน-เลขเย็น
         </div>
 
-        {/* 광고 — 하단 */}
-        <AdBanner slot="9081251463" className="mb-2" />
-
+        <AdBanner slot="9081251463" />
       </div>
     </main>
   )
