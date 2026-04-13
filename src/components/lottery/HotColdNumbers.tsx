@@ -12,76 +12,79 @@ function StatBadge({
   digit,
   count,
   variant,
+  rank,
 }: {
   digit: string
   count: number
   variant: 'hot' | 'cold'
+  rank: number
 }) {
   const isHot = variant === 'hot'
+  const rankEmoji = rank === 0 ? '🥇' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : ''
+
   return (
     <div
-      className={`
-        flex flex-col items-center justify-center
-        rounded-xl px-3 py-2 min-w-[56px]
-        border font-mono font-bold
-        ${isHot
-          ? 'bg-red-500/10 border-red-400/40 text-red-300'
-          : 'bg-blue-500/10 border-blue-400/40 text-blue-300'
-        }
-      `}
+      className="flex flex-col items-center justify-center rounded-2xl px-4 py-3 min-w-[64px] border transition-transform hover:scale-105 cursor-default"
+      style={{
+        background: isHot
+          ? 'linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05))'
+          : 'linear-gradient(135deg, rgba(59,130,246,0.15), rgba(59,130,246,0.05))',
+        borderColor: isHot ? 'rgba(239,68,68,0.3)' : 'rgba(59,130,246,0.3)',
+      }}
     >
-      <span className="text-xl">{digit}</span>
-      <span className="text-[10px] opacity-60 mt-0.5">{count}ครั้ง</span>
+      {rankEmoji && <span className="text-[10px] mb-0.5">{rankEmoji}</span>}
+      <span className="font-mono-num font-bold text-2xl"
+        style={{ color: isHot ? '#FCA5A5' : '#93C5FD' }}>
+        {digit}
+      </span>
+      <span className="text-[10px] mt-0.5 opacity-50">{count}ครั้ง</span>
     </div>
   )
 }
 
 export default function HotColdNumbers({ hot, cold }: Props) {
   return (
-    <section className="w-full rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="font-bold text-slate-800 dark:text-slate-100 text-base">
-          📊 สถิติเลข 2 ตัวบน (50 งวดล่าสุด)
+    <section
+      className="w-full rounded-3xl p-6"
+      style={{
+        background: '#162032',
+        border: '1px solid rgba(255,255,255,0.06)',
+      }}
+    >
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="font-bold text-white text-base">
+          📊 สถิติเลข 2 ตัวบน
         </h2>
-        <a
-          href="/statistics"
-          className="text-xs text-yellow-600 dark:text-yellow-400 hover:underline"
-        >
-          ดูทั้งหมด →
-        </a>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-slate-500">50 งวดล่าสุด</span>
+          <a
+            href="/statistics"
+            className="text-xs font-semibold px-3 py-1.5 rounded-full transition-opacity hover:opacity-80"
+            style={{ background: 'rgba(255,215,0,0.15)', color: '#FFD700' }}
+          >
+            ดูสถิติเต็ม →
+          </a>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-6">
-        {/* HOT */}
         <div>
-          <p className="text-xs font-semibold text-red-500 mb-2 flex items-center gap-1">
-            🔥 เลขร้อน
+          <p className="text-xs font-bold text-red-400 mb-3 flex items-center gap-1.5">
+            🔥 เลขร้อน <span className="text-slate-600 font-normal">ออกบ่อย</span>
           </p>
           <div className="flex flex-wrap gap-2">
-            {hot.map((item) => (
-              <StatBadge
-                key={item.digit}
-                digit={item.digit}
-                count={item.count}
-                variant="hot"
-              />
+            {hot.map((item, i) => (
+              <StatBadge key={item.digit} digit={item.digit} count={item.count} variant="hot" rank={i} />
             ))}
           </div>
         </div>
-
-        {/* COLD */}
         <div>
-          <p className="text-xs font-semibold text-blue-500 mb-2 flex items-center gap-1">
-            🧊 เลขเย็น
+          <p className="text-xs font-bold text-blue-400 mb-3 flex items-center gap-1.5">
+            🧊 เลขเย็น <span className="text-slate-600 font-normal">ไม่ออกนาน</span>
           </p>
           <div className="flex flex-wrap gap-2">
-            {cold.map((item) => (
-              <StatBadge
-                key={item.digit}
-                digit={item.digit}
-                count={item.count}
-                variant="cold"
-              />
+            {cold.map((item, i) => (
+              <StatBadge key={item.digit} digit={item.digit} count={item.count} variant="cold" rank={i} />
             ))}
           </div>
         </div>

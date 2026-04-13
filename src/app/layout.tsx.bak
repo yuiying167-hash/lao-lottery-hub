@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Sarabun, Roboto_Mono, Noto_Sans_Lao } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/components/ui/Navbar'
 
 const sarabun = Sarabun({
   variable: '--font-sarabun',
@@ -37,21 +36,8 @@ export default function RootLayout({
       lang="th"
       className={`${sarabun.variable} ${robotoMono.variable} ${notoSansLao.variable}`}
     >
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3198582468837090"
-          crossOrigin="anonymous"
-        />
-      </head>
-      <body className="min-h-screen flex flex-col font-[var(--font-sarabun)] antialiased bg-[#0F172A] text-white">
-        <Navbar />
-        <div className="flex-1">
-          {children}
-        </div>
-        <footer className="border-t border-white/5 py-6 text-center text-xs text-slate-500">
-          © 2026 Lao Lottery Hub · ข้อมูลจาก mthai.com · อัปเดตทุกวันจันทร์ พุธ ศุกร์
-        </footer>
+      <body className="min-h-full flex flex-col font-[var(--font-sarabun)] antialiased">
+        {children}
       </body>
     </html>
   )
